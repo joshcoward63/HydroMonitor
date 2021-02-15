@@ -2,6 +2,7 @@ from flask import Flask, render_template,request, redirect, request
 import webbrowser
 from threading import Timer
 import json
+import tempRecorder
 
 
 app = Flask(__name__)
@@ -21,7 +22,7 @@ def open_browser():
 @app.route('/getTemp', methods=['GET'])
 def getTemp():
     try:
-        c, f = get_temp()
+        c, f = tempRecorder.get_temp()
         temp = f
     except:
         temp = 0
