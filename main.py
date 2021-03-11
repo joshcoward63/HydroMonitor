@@ -30,7 +30,7 @@ def getTemp():
     return str(temp)
 
 @app.route('/getHumidity', methods=['GET'])
-def getTemp():
+def getHumidity():
     try:
         temp, humidity = dht11.get_temp_humidity()
     except:
