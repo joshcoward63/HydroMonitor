@@ -3,7 +3,7 @@ import webbrowser
 from threading import Timer
 import json
 import tempRecorder
-
+import dht11
 
 app = Flask(__name__)
 
@@ -29,7 +29,15 @@ def getTemp():
         print("Error temperature not read")
     return str(temp)
 
-
+@app.route('/getHumidity', methods=['GET'])
+def getTemp():
+    try:
+        temp, humidity = dht11.get_temp_humidity()
+    except:
+        temp = 0
+        humidity = 0
+        print("Error Humidity not read")
+    return str(humidity)
 
 if __name__ == '__main__':
     Timer(1, open_browser).start()
