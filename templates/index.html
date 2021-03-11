@@ -51,10 +51,10 @@
         function sendRequest(){
             $.ajax({
             type:"GET",
-            url: "{{url_for('gethumidity')}}",
+            url: "{{url_for('getHumidity')}}",
             success: 
                 function(data){
-                $('#humiditylabel').html(data + " %"); //insert text of test.php into your div            
+                $('#humidityLabel').html(data); //insert text of test.php into your div            
             },
             complete: function() {
             // Schedule the next request when the current one's complete
