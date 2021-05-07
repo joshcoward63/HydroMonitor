@@ -19,8 +19,34 @@
                 <label id="humidityLabel">Humidity</label>
                 <img src="../static/kissclipart-humidity-icon-png-clipart-humidity-computer-icons-7d328a5376be7a8d.png">
             </li>
-          </ul> 
-        
+          </ul>   
+          <table class="customTable">
+            <thead>
+              <tr>
+                <th>Temps</th>
+                <th>Hourly</th>
+                <th>Daily</th>
+                <th>Weekly</th>
+                <th>Monthly</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Low</td>
+                <td id="hourlyLow">---</td>
+                <td id="dailyLow">---</td>
+                <td id="weeklyLow">---</td>
+                <td id="monthlyLow">---</td>
+              </tr>
+              <tr>
+                <td>High</td>
+                <td id="hourlyHigh">---</td>
+                <td id="dailyHigh">---</td>
+                <td id="weeklyHigh">---</td>
+                <td id="monthlyHigh">---</td>
+              </tr>
+            </tbody>
+          </table>      
     </div>
 
 </body>
@@ -45,7 +71,7 @@
         });
   </script>
 
-<script>
+  <script>
     $(document).ready(function(){
         sendRequest();
         function sendRequest(){
@@ -64,4 +90,25 @@
         };
         });
   </script>
+
+<script>
+  $(document).ready(function(){
+      sendRequest();
+      function sendRequest(){
+          $.ajax({
+          type:"GET",
+          url: "{{url_for('getHourly')}}",
+          success: 
+              function(low, high){
+              $('#hourlyLow').html(low);  
+              $('#hourlyHigh').html(high);    
+          },
+          complete: function() {
+          // Schedule the next request when the current one's complete
+          setInterval(sendRequest, 10000); // The interval set to 5 seconds
+      }
+      });
+      };
+      });
+</script>
 </html>
