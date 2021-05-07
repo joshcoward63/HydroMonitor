@@ -22,7 +22,23 @@ io.sockets.on('connection', newConnection);
 	  io.to(socket.id).emit("test", "boobs");
 	  socket.broadcast.emit("test","boobs");
 
-	socket.on("tits", function(data){
-		console.log(data);
+	socket.on("temp",function(temp){
+		socket.broadcast.emit("temp", temp);
+	})
+
+	socket.on("humidity",function(humidity){
+		socket.broadcast.emit("humidity", humidity);
+	})
+
+	socket.on("hourly",function(low, high){
+		socket.broadcast.emit("hourly", low, high);
+	})
+
+	socket.on("daily",function(low, high){
+		socket.broadcast.emit("daily", low, high);
+	})
+
+	socket.on("weekly",function(low, high){
+		socket.broadcast.emit("weekly", low, high);
 	})
 }
